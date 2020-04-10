@@ -53,7 +53,7 @@ namespace Extension
 
             Console.CursorLeft = pos + 3;
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write(progress.ToString() + " | " + total.ToString() + " " + msg);
+            Console.Write($"{DateTime.Now.ToString("H:mm")} |{(progress < 10 ? " " : "")}{progress.ToString()} | {total.ToString()} {msg}");
         }
     }
 }
