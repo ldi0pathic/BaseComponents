@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Extension
+namespace Extensions
 {
     public static class StringExtension
     {

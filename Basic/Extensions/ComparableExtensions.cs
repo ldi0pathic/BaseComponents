@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Extension
+namespace Extensions
 {
     public static class ComparableExtensions
     {

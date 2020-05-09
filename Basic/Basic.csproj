@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>Extensions</AssemblyName>
-    <RootNamespace>Extension</RootNamespace>
+    <AssemblyName>Basic</AssemblyName>
+    <RootNamespace>Basic</RootNamespace>
   </PropertyGroup>
 
 </Project>

@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace Extension
+namespace Extensions
 {
     public static class ConsoleExtension
     {
-        public static void WriteOnLine(this string msg, int postion, ConsoleColor color = ConsoleColor.White )
+        public static void WriteOnLine(this string msg, int position, ConsoleColor color = ConsoleColor.White )
         {
             var oldPos = Console.CursorTop;
 
-            Console.SetCursorPosition(Console.CursorLeft, postion);
+            Console.SetCursorPosition(Console.CursorLeft, position);
             msg.WriteLine(color);
             Console.SetCursorPosition(Console.CursorLeft, oldPos);
         }
@@ -31,10 +31,25 @@ namespace Extension
             Console.ForegroundColor = oldColor;
         }
 
+        public static void ClearLine(int position = -1)
+        {
+            if (position == -1)
+                position = Console.CursorTop;
+
+            var oldPos = Console.CursorTop;
+
+            Console.SetCursorPosition(Console.CursorLeft, position);
+            Console.WriteLine();
+            Console.SetCursorPosition(Console.CursorLeft, oldPos);
+        }
+
         public static void DrawProgressBar(this string msg, int progress, int total)
         {
             Console.CursorLeft = 1;
             float onechunk = 30.0f / total;
+
+            if (progress >= total)
+                progress = total;
 
             int pos = 1;
             for (int i = 0; i < onechunk * progress; i++)
