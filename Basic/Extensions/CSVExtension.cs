@@ -24,6 +24,21 @@ namespace Extensions
             }
         }
 
+        public static IEnumerable<string> ToCsv<T,T2>(this IDictionary<T,T2> objectlist, string separator = ";", string separatorReplace = ",", bool header = true)
+        {
+            FieldInfo[] fields = typeof(T2).GetFields();
+            PropertyInfo[] properties = typeof(T2).GetProperties();
+            if (header)
+            {
+                yield return string.Join(separator, new[] { "Key" }.Concat(fields.Select(f => f.Name).Union(properties.Select(p => p.GetPropertyDisplayName().Replace(separator, separatorReplace)))).ToArray());
+            }
+            foreach (var o in objectlist)
+            {
+                yield return string.Join(separator, new[] { o.Key.ToString() }.Concat(fields.Select(f => (f.GetValue(o.Value) ?? "").ToString().Replace(separator, separatorReplace))
+                    .Union(properties.Select(p => (p.GetValue(o.Value, null) ?? "").ToString().Replace(separator, separatorReplace)))).ToArray());
+            }
+        }
+
         private static string GetPropertyDisplayName(this PropertyInfo pi)
         {
             var dp = pi.GetCustomAttributes(typeof(DisplayNameAttribute), true).Cast<DisplayNameAttribute>().SingleOrDefault();
